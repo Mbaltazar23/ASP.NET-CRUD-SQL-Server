@@ -1,0 +1,37 @@
+﻿@model Instructor
+
+
+<div class="modal" tabindex="-1" id="nuevoInstructor">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo Instructor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input id="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <div class="form-group">
+                        <label asp-for="Especialidad" class="control-label"></label>
+                        <input asp-for="Especialidad" class="form-control"/>
+                        <span asp-validation-for="Especialidad" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PersonaID" class="control-label"></label>
+                        <select asp-for="PersonaID" class="form-control" asp-items="ViewBag.PersonaID">
+                            <option value="">Seleccione a una Persona</option>
+                        </select>
+                        <span asp-validation-for="PersonaID" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-success" data-save="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

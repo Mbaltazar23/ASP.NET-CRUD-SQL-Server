@@ -1,0 +1,74 @@
+﻿
+@model Persona
+
+<div class="modal" tabindex="-1" id="EditarPersona">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Persona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input id="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <input type="hidden" asp-for="ID" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Nombres" class="control-label"></label>
+                            <input asp-for="Nombres" class="form-control" id="nombrePer" />
+                            <span asp-validation-for="Nombres" class="text-danger" id="TextoPer"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Apellidos" class="control-label"></label>
+                            <input asp-for="Apellidos" class="form-control" id="apellidoPer" />
+                            <span asp-validation-for="Apellidos" class="text-danger" id="TextoApellido"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="FechaNacimiento" class="control-label"></label>
+                            <input asp-for="FechaNacimiento" class="form-control" id="fechaPer" />
+                            <span asp-validation-for="FechaNacimiento" class="text-danger" id="TextoFechaPer"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Documento" class="control-label"></label>
+                            <input asp-for="Documento" class="form-control" id="DocumentoPer" />
+                            <span asp-validation-for="Documento" class="text-danger" id="TextoPerDocu"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" id="EmailPer" />
+                        <span asp-validation-for="Email" class="text-danger" id="TextEmail"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Telefono" class="control-label"></label>
+                            <input asp-for="Telefono" class="form-control" id="telefonoPer" />
+                            <span asp-validation-for="Telefono" class="text-danger" id="TextoTelefono"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="DireccionPersona" class="control-label"></label>
+                            <input asp-for="DireccionPersona" class="form-control" id="DireccionPer" />
+                            <span asp-validation-for="DireccionPersona" class="text-danger" id="TextoDireccion"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="EstadoPersona" /> @Html.DisplayNameFor(model => model.EstadoPersona)
+                            </label>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" data-save="modal">Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

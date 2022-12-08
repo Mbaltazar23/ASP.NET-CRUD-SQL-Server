@@ -1,0 +1,32 @@
+﻿@model Persona
+<div class="modal" tabindex="-1" id="QuitarPersona">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Desea Eliminara a esta Persona ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="ID" />
+                      <input id="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <div class="card-body">
+                        <p><strong>@Html.DisplayNameFor(model => model.Nombres):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Nombres)</p>
+                        <p><strong>@Html.DisplayNameFor(model => model.Apellidos):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Apellidos)</p>
+                        <p><strong>@Html.DisplayNameFor(model => model.FechaNacimiento):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.FechaNacimiento)</p>
+                        <p><strong>@Html.DisplayNameFor(model => model.Documento):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Documento)</p>
+                        <p><strong>@Html.DisplayNameFor(model => model.Email):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Email)</p>
+                        <p><strong>@Html.DisplayNameFor(model => model.Telefono):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Telefono)</p>
+                        <p><strong>@Html.DisplayNameFor(model => model.DireccionPersona):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.DireccionPersona)</p>
+                        <p><strong>@Html.DisplayNameFor(model => model.EstadoPersona):</strong> &nbsp; &nbsp;@Html.DisplayFor(model => model.EstadoPersona)</p>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" data-save="modal">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

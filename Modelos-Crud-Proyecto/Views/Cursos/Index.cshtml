@@ -1,0 +1,108 @@
+﻿@model Paginacion<Modelos_Crud_Proyecto.Models.Curso>
+
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<h1>Cursos</h1>
+
+<div id="mostarModalAqui"></div>
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#nuevoCurso" data-url="@Url.Action("Create")"> Nuevo Curso</button>
+</p>
+<form asp-action="Index" method="get">
+    <p>
+        Filtro : <input type="text" name="buscarTexto" value="@ViewData["Filtro"]" />
+        <input type="submit" value="Buscar" class="btn btn-default" />
+        <a asp-action="Index">Todos los Registros </a> | Registros mostrados : @Model.TotalR
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["NombreCurso"]" asp-route-filtrar="@ViewData["Filtro"]">Nombre</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["DescripcionCurso"]" asp-route-filtrar="@ViewData["Filtro"]">Descripcion</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["CreditoCurso"]" asp-route-filtrar="@ViewData["Filtro"]">Creditos</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["HorasCurso"]" asp-route-filtrar="@ViewData["Filtro"]">Horas</a>
+            </th>
+            <th>
+                Costo
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["NombreCategoria"]" asp-route-filtrar="@ViewData["Filtro"]">Categoria</a>
+            </th>
+            <th>
+                Estado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Creditos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Horas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Costo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.categoria.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success" data-toggle="ajax-modal" data-target="#editarCurso" data-url="@Url.Action($"Edit/{item.CursoID}")">Editar</button> |
+                    <button type="button" class="btn btn-secondary" data-toggle="ajax-modal" data-target="#VerCurso" data-url="@Url.Action($"Details/{item.CursoID}")">Detalles</button> |
+                    <button type="button" class="btn btn-danger" data-toggle="ajax-modal" data-target="#quitarCurso" data-url="@Url.Action($"Delete/{item.CursoID}")">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDesabilitado = !Model.PreviaPag ? "disabled" : "";
+    var nextDesabilitado = !Model.SiguientePag ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-ordenar="@ViewData["ordenarFiltro"]"
+   asp-route-pag="@(Model.Indice -1)"
+   asp-route-filtrar="@ViewData["Filtro"]"
+   class="btn btn-default @prevDesabilitado">
+    Anterior
+</a>
+@for (int i = 1; i <= Model.TotalP; i++)
+{
+    <a asp-action="Index"
+       asp-route-ordenar="@ViewData["ordenarFiltro"]"
+       asp-route-pag="@i"
+       asp-route-filtrar="@ViewData["Filtro"]"
+       class="btn btn-default">
+        @i
+    </a>
+}
+<a asp-action="Index"
+   asp-route-ordenar="@ViewData["ordenarFiltro"]"
+   asp-route-pag="@(Model.Indice +1)"
+   asp-route-filtrar="@ViewData["Filtro"]"
+   class="btn btn-default @nextDesabilitado">
+    Siguiente
+</a>

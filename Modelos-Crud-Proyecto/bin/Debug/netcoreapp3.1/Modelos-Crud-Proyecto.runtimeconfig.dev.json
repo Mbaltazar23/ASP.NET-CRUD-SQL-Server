@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Arica\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Arica\\.nuget\\packages"
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+﻿@model Paginacion<Modelos_Crud_Proyecto.Models.Instructor>
+
+@{
+    ViewData["Title"] = "Instructores";
+}
+
+<h1>Instructores</h1>
+<div id="mostarModalAqui"></div>
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#nuevoInstructor" data-url="@Url.Action("Create")"> Nueva Instructor</button>
+</p>
+<form asp-action="Index" method="get">
+    <p>
+        Filtro : <input type="text" name="buscarTexto" value="@ViewData["Filtro"]" />
+        <input type="submit" value="Buscar" class="btn btn-default" />
+        <a asp-action="Index">Todos los Registros </a> | Registros mostrados : @Model.TotalR
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["EspecialidadParam"]" asp-route-filtrar="@ViewData["Filtro"]">Especialidad</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["NombreInstructorParam"]" asp-route-filtrar="@ViewData["Filtro"]">Nombre Instructor</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["ApellidoInstructorParam"]" asp-route-filtrar="@ViewData["Filtro"]">Apellido Instructor</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Especialidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.persona.Nombres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.persona.Apellidos)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success" data-toggle="ajax-modal" data-target="#EditarInstructor" data-url="@Url.Action($"Edit/{item.ID}")">Editar</button> |
+                    <button type="button" class="btn btn-secondary" data-toggle="ajax-modal" data-target="#VerInstructor" data-url="@Url.Action($"Details/{item.ID}")">Detalles</button> |
+                    <button type="button" class="btn btn-danger" data-toggle="ajax-modal" data-target="#QuitarInstructor" data-url="@Url.Action($"Delete/{item.ID}")">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDesabilitado = !Model.PreviaPag ? "disabled" : "";
+    var nextDesabilitado = !Model.SiguientePag ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-ordenar="@ViewData["ordenarFiltro"]"
+   asp-route-pag="@(Model.Indice -1)"
+   asp-route-filtrar="@ViewData["Filtro"]"
+   class="btn btn-default @prevDesabilitado">
+    Anterior
+</a>
+@for (int i = 1; i <= Model.TotalP; i++)
+{
+    <a asp-action="Index"
+       asp-route-ordenar="@ViewData["ordenarFiltro"]"
+       asp-route-pag="@i"
+       asp-route-filtrar="@ViewData["Filtro"]"
+       class="btn btn-default">
+        @i
+    </a>
+}
+<a asp-action="Index"
+   asp-route-ordenar="@ViewData["ordenarFiltro"]"
+   asp-route-pag="@(Model.Indice +1)"
+   asp-route-filtrar="@ViewData["Filtro"]"
+   class="btn btn-default @nextDesabilitado">
+    Siguiente
+</a>

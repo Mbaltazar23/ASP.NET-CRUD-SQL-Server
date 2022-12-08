@@ -1,0 +1,61 @@
+﻿@model Inscripcion
+
+
+<div class="modal" tabindex="-1" id="editarInscripcion">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Inscripcion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="InscripcionID" />
+                    <input id="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Grado" class="control-label"></label>
+                            <select asp-for="Grado" class="form-control" asp-items="Html.GetEnumSelectList<GradosInscripcion>()">
+                                <option value="">Seleccione un Grado</option>
+                            </select>
+                            <span asp-validation-for="Grado" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="CursoID" class="control-label"></label>
+                            <select asp-for="CursoID" class="form-control" asp-items="ViewBag.CursoID">
+                                <option value="">Seleccione un Curso</option>
+                            </select>
+                            <span asp-validation-for="CursoID" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="EstudianteID" class="control-label"></label>
+                            <select asp-for="EstudianteID" class="form-control" asp-items="ViewBag.EstudianteID">
+                                <option value="">Seleccione un Estudiante</option>
+                            </select>
+                            <span asp-validation-for="EstudianteID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Fecha" class="control-label"></label>
+                            <input asp-for="Fecha" class="form-control" />
+                            <span asp-validation-for="Fecha" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Pago" class="control-label"></label>
+                        <input asp-for="Pago" class="form-control" />
+                        <span asp-validation-for="Pago" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" data-save="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+﻿@model Curso
+
+<div class="modal" tabindex="-1" id="nuevoCurso">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nueva Curso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input id="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="CategoriaID" class="control-label"></label>
+                            <select asp-for="CategoriaID" class="form-control" asp-items="ViewBag.CategoriaID">
+                                <option value="">Seleccione una Categoria</option>
+                            </select>
+                            <span asp-validation-for="CategoriaID" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Creditos" class="control-label"></label>
+                            <input asp-for="Creditos" class="form-control" />
+                            <span asp-validation-for="Creditos" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Horas" class="control-label"></label>
+                            <input asp-for="Horas" class="form-control" />
+                            <span asp-validation-for="Horas" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Costo" class="control-label"></label>
+                            <input asp-for="Costo" class="form-control" />
+                            <span asp-validation-for="Costo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Descripcion" class="control-label"></label>
+                            <textarea asp-for="Descripcion" class="form-control"></textarea>
+                            <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-success" data-save="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

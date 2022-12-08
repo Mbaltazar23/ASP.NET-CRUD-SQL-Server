@@ -1,0 +1,95 @@
+﻿@model Paginacion<Modelos_Crud_Proyecto.Models.Inscripcion>
+
+@{
+    ViewData["Title"] = "Inscripciones";
+}
+
+<h1>Inscripciones</h1>
+<div id="mostarModalAqui"></div>
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#nuevaInscripcion" data-url="@Url.Action("Create")"> Nueva Inscripcion</button>
+</p>
+<form asp-action="Index" method="get">
+    <p>
+        Filtro : <input type="text" name="buscarTexto" value="@ViewData["Filtro"]" />
+        <input type="submit" value="Buscar" class="btn btn-default" />
+        <a asp-action="Index">Todos los Registros </a> | Registros mostrados : @Model.TotalR
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["GradoInscripcion"]" asp-route-filtrar="@ViewData["Filtro"]">Grado</a>
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Pago
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["CursoNombre"]" asp-route-filtrar="@ViewData["Filtro"]">Curso</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["EstudianteInscrito"]" asp-route-filtrar="@ViewData["Filtro"]">Estudiante</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.curso.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estudiante.Codigo)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success" data-toggle="ajax-modal" data-target="#editarInscripcion" data-url="@Url.Action($"Edit/{item.InscripcionID}")">Editar</button> |
+                    <button type="button" class="btn btn-secondary" data-toggle="ajax-modal" data-target="#VerInscripcion" data-url="@Url.Action($"Details/{item.InscripcionID}")">Detalles</button> |
+                    <button type="button" class="btn btn-danger" data-toggle="ajax-modal" data-target="#QuitarInscripcion" data-url="@Url.Action($"Delete/{item.InscripcionID}")">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDesabilitado = !Model.PreviaPag ? "disabled" : "";
+    var nextDesabilitado = !Model.SiguientePag ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-ordenar="@ViewData["ordenarFiltro"]"
+   asp-route-pag="@(Model.Indice -1)"
+   asp-route-filtrar="@ViewData["Filtro"]"
+   class="btn btn-default @prevDesabilitado">
+    Anterior
+</a>
+@for (int i = 1; i <= Model.TotalP; i++)
+{
+    <a asp-action="Index"
+       asp-route-ordenar="@ViewData["ordenarFiltro"]"
+       asp-route-pag="@i"
+       asp-route-filtrar="@ViewData["Filtro"]"
+       class="btn btn-default">
+        @i
+    </a>
+}
+<a asp-action="Index"
+   asp-route-ordenar="@ViewData["ordenarFiltro"]"
+   asp-route-pag="@(Model.Indice +1)"
+   asp-route-filtrar="@ViewData["Filtro"]"
+   class="btn btn-default @nextDesabilitado">
+    Siguiente
+</a>

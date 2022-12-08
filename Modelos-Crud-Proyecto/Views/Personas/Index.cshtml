@@ -1,0 +1,118 @@
+﻿@model Paginacion<Modelos_Crud_Proyecto.Models.Persona>
+
+@{
+    ViewData["Title"] = "Personas";
+}
+
+<h1>Personas</h1>
+
+<div id="mostarModalAqui"></div>
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#nuevaPersona" data-url="@Url.Action("Create")">Nueva Persona</button>
+</p>
+<form asp-action="Index" method="get">
+    <p>
+        Filtro : <input type="text" name="buscarTexto" value="@ViewData["Filtro"]" />
+        <input type="submit" value="Buscar" class="btn btn-default" />
+        <a asp-action="Index">Todos los Registros </a> | Registros mostrados : @Model.TotalR
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["NombresParam"]" asp-route-filtrar="@ViewData["Filtro"]">Nombres</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["ApellidosParam"]" asp-route-filtrar="@ViewData["Filtro"]">Apellidos</a>
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["DocumentoParam"]" asp-route-filtrar="@ViewData["Filtro"]"> Documentos</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["EmailParam"]" asp-route-filtrar="@ViewData["Filtro"]">Email</a>
+            </th>
+            <th>
+                Telefono
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-ordenar="@ViewData["DireccionParam"]" asp-route-filtrar="@ViewData["Filtro"]">Direccion</a>
+            </th>
+            <th>
+                Estado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellidos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Documento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DireccionPersona)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoPersona)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success" data-toggle="ajax-modal" data-target="#EditarPersona" data-url="@Url.Action($"Edit/{item.ID}")">Editar</button> |
+                    <button type="button" class="btn btn-secondary" data-toggle="ajax-modal" data-target="#VerPersona" data-url="@Url.Action($"Details/{item.ID}")">Detalles</button> |
+                    <button type="button" class="btn btn-danger" data-toggle="ajax-modal" data-target="#QuitarPersona" data-url="@Url.Action($"Delete/{item.ID}")">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDesabilitado = !Model.PreviaPag ? "disabled" : "";
+    var nextDesabilitado = !Model.SiguientePag ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-ordenar="@ViewData["ordenarFiltro"]"
+   asp-route-pag="@(Model.Indice -1)"
+   asp-route-filtrar="@ViewData["Filtro"]"
+   class="btn btn-default @prevDesabilitado">
+    Anterior
+</a>
+@for (int i = 1; i <= Model.TotalP; i++)
+{
+    <a asp-action="Index"
+       asp-route-ordenar="@ViewData["ordenarFiltro"]"
+       asp-route-pag="@i"
+       asp-route-filtrar="@ViewData["Filtro"]"
+       class="btn btn-default">
+        @i
+    </a>
+}
+<a asp-action="Index"
+   asp-route-ordenar="@ViewData["ordenarFiltro"]"
+   asp-route-pag="@(Model.Indice +1)"
+   asp-route-filtrar="@ViewData["Filtro"]"
+   class="btn btn-default @nextDesabilitado">
+    Siguiente
+</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

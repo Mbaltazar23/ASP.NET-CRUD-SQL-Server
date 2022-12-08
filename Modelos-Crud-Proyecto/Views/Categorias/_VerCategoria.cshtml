@@ -1,0 +1,21 @@
+﻿
+@model Categoria
+<div class="modal" tabindex="-1" id="VerEstudiante">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Categoria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <p><strong>@Html.DisplayNameFor(model => model.Nombre):</strong>&nbsp; &nbsp; @Html.DisplayFor(model => model.Nombre)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.Descripcion):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Descripcion)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.Estado):</strong> &nbsp; &nbsp; @Html.DisplayFor(model => model.Estado)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

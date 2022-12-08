@@ -1,0 +1,28 @@
+﻿@model Inscripcion
+
+<div class="modal" tabindex="-1" id="VerInscripcion">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inscripción</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <p><strong>@Html.DisplayNameFor(model => model.Grado):</strong>&nbsp; &nbsp; @Html.DisplayFor(model => model.Grado)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.Fecha):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Fecha)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.Pago):</strong>&nbsp; &nbsp;$@Html.DisplayFor(model => model.Pago)</p>
+                    <p><strong>Nombre del Curso:</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.curso.Nombre)</p>
+                    <p><strong>Descripción del Curso:</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.curso.Descripcion)</p>
+                    <p><strong>Estudiante:</strong> &nbsp; &nbsp; @Html.DisplayFor(model => model.estudiante.persona.Nombres)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.estudiante.Codigo):</strong> &nbsp; &nbsp;@Html.DisplayFor(model => model.estudiante.Codigo)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

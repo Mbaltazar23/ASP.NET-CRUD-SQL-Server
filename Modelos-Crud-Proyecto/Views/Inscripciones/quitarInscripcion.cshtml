@@ -1,0 +1,33 @@
+﻿@model Inscripcion
+
+
+<div class="modal" tabindex="-1" id="QuitarInscripcion">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Desea quitar esta Inscripción ? </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="InscripcionID" />
+                <input id="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                <div class="card-body">
+                    <p><strong>@Html.DisplayNameFor(model => model.Grado):</strong>&nbsp; &nbsp; @Html.DisplayFor(model => model.Grado)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.Fecha):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Fecha)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.Pago):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.Pago)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.curso):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.curso.Nombre)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.curso.Descripcion):</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.curso.Descripcion)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.estudiante):</strong> &nbsp; &nbsp; @Html.DisplayFor(model => model.estudiante.persona.Nombres)</p>
+                    <p><strong>@Html.DisplayNameFor(model => model.estudiante.Codigo):</strong> &nbsp; &nbsp;@Html.DisplayFor(model => model.estudiante.Codigo)</p>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger" data-save="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

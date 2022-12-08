@@ -1,0 +1,30 @@
+﻿@model Asignacion
+
+<div class="modal" tabindex="-1" id="quitarAsignacion">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Desea Eliminar a esta Asignacion ? </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="AsignacionID" />
+                    <input id="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <div class="card-body">
+                        <p><strong>@Html.DisplayNameFor(model => model.Fecha):</strong>&nbsp; &nbsp; @Html.DisplayFor(model => model.Fecha)</p>
+                        <p><strong>Descripcion del Curso :</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.curso.Descripcion)</p>
+                        <p><strong>Nombre del Instructor :</strong>&nbsp; &nbsp;@Html.DisplayFor(model => model.instructor.persona.Nombres)</p>
+                        <p><strong>@Html.DisplayNameFor(model => model.instructor.Especialidad):</strong> &nbsp; &nbsp; @Html.DisplayFor(model => model.instructor.Especialidad)</p>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" data-save="modal">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
